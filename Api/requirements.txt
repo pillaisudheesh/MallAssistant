@@ -1,0 +1,24 @@
+# Backend web framework
+fastapi==0.108.0
+uvicorn[standard]==0.23.1
+
+# Database ORM
+SQLAlchemy==2.0.23
+
+# Password hashing
+passlib[bcrypt]==1.7.4
+bcrypt==4.0.1
+
+# JWT authentication
+python-jose==3.3.0
+python-multipart==0.0.6
+
+# HTTP requests (for calling Rasa from FastAPI)
+requests==2.31.0
+
+# Rasa Open Source
+rasa==3.6.20
+rasa-sdk==3.6.2
+
+# Optional: development tools
+python-dotenv==1.0.0

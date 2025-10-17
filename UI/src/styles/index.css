@@ -1,0 +1,26 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+@import "tailwindcss";
+@theme {
+    --font-Roboto: "Roboto", sans-serif; 
+}
+@custom-variant dark (&:where(.dark, .dark *));
+*{
+    @apply transition-colors duration-200;  
+}
+
+@keyframes gradientShift {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+  .bg-animated-gradient {
+    background: linear-gradient(270deg, rgba(79,70,229,0.5), rgba(168,85,247,0.4), rgba(236,72,153,0.4));
+    background-size: 400% 400%;
+    animation: gradientShift 12s ease infinite;
+  } 
