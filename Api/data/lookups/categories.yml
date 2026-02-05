@@ -1,0 +1,9 @@
+version: "3.1"
+nlu:
+- lookup: category
+  examples: |
+    - clothing
+    - electronics
+    - food
+    - footwear
+    - accessories

@@ -4,6 +4,7 @@ import { authActions } from "../../store";
 import { useNavigate } from "react-router-dom";
 import { FaPaperPlane } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
+import { Send } from "lucide-react";
 
 import chatbotService from "../../services/chatbot.service";
 import Header from "../Header/header";
@@ -11,6 +12,7 @@ import Header from "../Header/header";
 const Chatbot = () => {
   const [query, setQuery] = useState("");
   const [messages, setMessages] = useState([]);
+  const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -31,8 +33,10 @@ const Chatbot = () => {
     setMessages((prev) => [...prev, { type: "user", text: query }]);
     const userQuery = {query};
     setQuery("");
+    setLoading(true);
     const data = await chatbotService.askChatbot(userQuery);
     setMessages((prev) => [...prev, { type: "bot", text: data.response }]);
+    setLoading(false);
   };
 
   const handleLogout = () => {
@@ -45,7 +49,7 @@ const Chatbot = () => {
     <Header title="MallMate Chatbot" />
 
     {/* Chat messages */}
-    <main className="flex-1 overflow-auto p-6 max-w-3xl mx-auto">
+    <main className="flex-1 overflow-auto p-6 max-w-3xl mx-auto w-full">
       <AnimatePresence initial={false}>
         {messages.map((msg, i) => (
           <motion.div
@@ -67,12 +71,29 @@ const Chatbot = () => {
             </div>
           </motion.div>
         ))}
+        {loading && (
+          <div className="flex justify-start">
+            <div className="bg-white border px-4 py-2 rounded-2xl text-sm shadow-md text-gray-500 flex items-center space-x-2">
+              <span className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></span>
+              <span className="w-2 h-2 bg-gray-400 rounded-full animate-bounce delay-150"></span>
+              <span className="w-2 h-2 bg-gray-400 rounded-full animate-bounce delay-300"></span>
+              <span>Mall Assistant is typing...</span>
+            </div>
+          </div>
+        )}
       </AnimatePresence>
       <div ref={messagesEndRef} />
     </main>
 
     {/* Input box at bottom */}
     <footer className="p-4 bg-[#2D046E]/50 backdrop-blur-2xl flex items-center max-w-3xl mx-auto w-full space-x-2 rounded-xl sticky bottom-0">
+    {/* <motion.div
+        className="fixed bottom-0 left-0 w-full flex justify-center px-4 pb-5 backdrop-blur-lg bg-white/10 border-t border-white/10"
+        initial={{ y: 50, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.4 }}
+      >
+        <div className="p-4 bg-[#2D046E]/50 backdrop-blur-2xl flex items-center max-w-3xl mx-auto w-full space-x-2 rounded-xl sticky bottom-0"> */}
       <input
         value={query}
         onChange={(e) => setQuery(e.target.value)}
@@ -86,8 +107,12 @@ const Chatbot = () => {
       >
         <FaPaperPlane />
       </button>
+      {/* </div>
+      </motion.div> */}
+      
     </footer>
   </div>
+  
   );
 };
 

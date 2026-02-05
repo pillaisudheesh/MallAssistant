@@ -15,14 +15,25 @@ rules:
 - rule: Find food
   steps:
     - intent: find_food
-    - action: action_find_food
+    - action: action_query_mall_db_dynamic
 
 - rule: Find store
   steps:
     - intent: find_store
-    - action: action_find_store
+    - action: action_query_mall_db_dynamic
 
 - rule: Offers
   steps:
     - intent: ask_offers
-    - action: action_ask_offers
+    - action: action_query_mall_db_dynamic
+
+- rule: Check Offers
+  steps:
+    - intent: check_offers
+    - action: action_query_mall_db_dynamic
+
+- rule: Find category
+  steps:
+    - intent: find_by_category
+    - action: action_query_mall_db_dynamic
+  

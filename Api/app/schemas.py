@@ -16,3 +16,11 @@ class UserOut(BaseModel):
 
     class Config:
         orm_mode = True
+
+class PromptRequest(BaseModel):
+    """Data model for the incoming request."""
+    prompt: str
+
+class GenerationResponse(BaseModel):
+    """Data model for the outgoing response."""
+    response: str

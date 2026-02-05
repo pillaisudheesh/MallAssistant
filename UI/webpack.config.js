@@ -36,7 +36,8 @@ module.exports = {
           secure: false,
           changeOrigin: true
         }
-      ]
+      ],
+      allowedHosts: "e2766c1cf298.ngrok-free.app",
     },
     plugins: [
           new HtmlWebpackPlugin({

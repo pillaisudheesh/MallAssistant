@@ -4,6 +4,7 @@ import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 import Login from './features/Login/Login';
 import Signup from './features/Login/Signup';
 import Chatbot from './components/Chatbot/Chatbot';
+import Promo from './features/Login/Promo/Promo';
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
     <Routes>
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
+      <Route path="/promo" element={<Promo />} />
       <Route
           path="/chatbot"
           element={
@@ -19,7 +21,7 @@ function App() {
             </ProtectedRoute>
           }
         />
-      <Route path="*" element={<Login />} />
+      <Route path="*" element={<Promo />} />
     </Routes>
   </Router>
   );

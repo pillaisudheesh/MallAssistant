@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState} from 'react';
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import AuthForm from "../../components/Auth/AuthForm";
@@ -8,6 +8,7 @@ import { authActions } from "../../store";
 const Signup = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [error, setError] = useState("");
   const handleSignup = async (formData) => {
     try {
       const data = await loginService.signup(formData); 
@@ -21,13 +22,13 @@ const Signup = () => {
       // Navigate to login page
       navigate("/login");
     } catch (err) {
-      console.error("Signup failed:", err.response?.data || err.message);
+      setError("⚠️ Unable to sign up. This email may already be registered.");
     }
   };
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <AuthForm type="signup" onSubmit={handleSignup} />
+      <AuthForm type="signup" onSubmit={handleSignup} error={error} />
     </div>
   );
 };

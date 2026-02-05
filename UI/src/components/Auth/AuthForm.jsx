@@ -1,9 +1,11 @@
 import React,{ useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
+
 import Social from "./Social";
 
 
-const   AuthForm = ({ type = "login", onSubmit }) => {
+const   AuthForm = ({ type = "login", onSubmit, error }) => {
   const [formData, setFormData] = useState({ name: "", email: "", password: "" });
 
   const handleChange = (e) =>
@@ -235,6 +237,20 @@ const   AuthForm = ({ type = "login", onSubmit }) => {
               {isLogin ? "Login" : "Sign Up"}
             </button>
           </form>
+
+          <AnimatePresence>
+          {error && (
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.3 }}
+              className="mb-4 text-sm text-white bg-red-500/10 border border-red-400/30 p-3 rounded-lg text-center"
+            >
+              {error}
+            </motion.div>
+          )}
+        </AnimatePresence>
 
           <div className="flex items-center justify-center my-6">
             <div className="w-1/4 border-t border-[#FFFFFF]/50" />

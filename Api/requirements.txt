@@ -17,8 +17,10 @@ python-multipart==0.0.6
 requests==2.31.0
 
 # Rasa Open Source
-rasa==3.6.20
-rasa-sdk==3.6.2
+# rasa==3.6.20
+# rasa-sdk==3.6.2
 
 # Optional: development tools
 python-dotenv==1.0.0
+chromadb
+pydantic

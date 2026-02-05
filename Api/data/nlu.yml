@@ -97,6 +97,7 @@ nlu:
     - any food places under 500
     - food options less than ₹400
     - cheap restaurants in the mall
+    
 
 - intent: find_store
   examples: |
@@ -104,9 +105,95 @@ nlu:
     - where can I find Zara
     - which floor is the Apple store on
     - where is the bookstore
+    - where can I find [Zara](shop)?
+    - where is [Puma](shop) located?
+    - can you tell me where [Reliance Digital](shop) is
+    - which floor is [H&M](shop) on
+    - is there a [Marks & Spencer](shop) here?
 
 - intent: ask_offers
   examples: |
     - what are the current offers
     - show me discounts
     - any sales going on
+
+# 2. Asking for Store Location
+- intent: find_shop
+  examples: |
+    - where can I find [Zara](shop)?
+    - where is [Puma](shop) located?
+    - can you tell me where [Reliance Digital](shop) is
+    - which floor is [H&M](shop) on
+    - is there a [Marks & Spencer](shop) here?
+
+# 3. Asking for Price Range Suggestions
+- intent: find_in_price_range
+  examples: |
+    - show me food options under ₹[500](price)
+    - where can I buy clothes below ₹[2000](price)?
+    - what can I eat under ₹[300](price)?
+    - any restaurants cheaper than ₹[600](price)?
+    - affordable shoes around ₹[1500](price)
+
+# 4. Asking for Product Category
+- intent: find_by_category
+  examples: |
+    - where can I find [electronics](category)?
+    - any [clothing](category) stores nearby?
+    - show me [accessories](category) shops
+    - I want to buy [footwear](category)
+    - find me a store that sells [beauty products](category)
+
+# 5. Mall Navigation Queries
+- intent: ask_directions
+  examples: |
+    - how do I get to the [food court](place)?
+    - show me the way to the [cinema](place)
+    - how far is the [parking area](place) from here?
+    - directions to the [kids zone](place)
+    - where is the [first floor washroom](place)?
+
+# 6. Current Offers and Discounts
+- intent: check_offers
+  examples: |
+    - what offers are available right now?
+    - any discount at [PVR](shop)?
+    - show me current deals in [food court](place)
+    - tell me about todays promotions
+    - which shops have sales running?
+
+# 7. Store Timings
+- intent: ask_timing
+  examples: |
+    - what time does [Zara](shop) open?
+    - when does [Big Bazaar](shop) close?
+    - is [Starbucks](shop) open now?
+    - give me the working hours for [Max Fashion](shop)
+    - closing time of [Shoppers Stop](shop)
+
+# 8. Amenities in Mall
+- intent: ask_amenities
+  examples: |
+    - is there free [wifi](amenity)?
+    - where can I find an [atm](amenity)?
+    - any [baby care room](amenity) here?
+    - do you have [wheelchair access](amenity)?
+    - where is the [help desk](amenity)?
+
+# 9. Complaints or Help
+- intent: report_issue
+  examples: |
+    - I lost my phone
+    - there is a problem with payment at [H&M](shop)
+    - I cantfind my bag
+    - I need help with parking
+    - someone can assist me at [food court](place)?
+
+# 10. General Chit‑Chat
+- intent: smalltalk
+  examples: |
+    - you are really helpful
+    - thank you
+    - who created you?
+    - what can you do?
+    - are you a bot?

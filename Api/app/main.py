@@ -30,46 +30,46 @@ def root():
 
 
 # ---------------- RASA AUTO-START ----------------
-def is_service_alive(url: str, retries: int = 20, delay: float = 2.0):
-    """Check if an HTTP service is alive with retries."""
-    for _ in range(retries):
-        try:
-            res = requests.get(url, timeout=2)
-            if res.status_code < 500:
-                return True
-        except Exception:
-            pass
-        time.sleep(delay)
-    return False
+# def is_service_alive(url: str, retries: int = 20, delay: float = 2.0):
+#     """Check if an HTTP service is alive with retries."""
+#     for _ in range(retries):
+#         try:
+#             res = requests.get(url, timeout=2)
+#             if res.status_code < 500:
+#                 return True
+#         except Exception:
+#             pass
+#         time.sleep(delay)
+#     return False
 
-def start_rasa_services():
-    """Start Rasa Core and Action Server in background threads."""
+# def start_rasa_services():
+#     """Start Rasa Core and Action Server in background threads."""
 
-    def run_rasa():
-        print("🚀 Starting Rasa Core (port 5005)...")
-        subprocess.run(
-            ["python", "-m", "rasa", "run", "--enable-api", "--cors", "*", "--port", "5005"],
-            cwd=".",
-        )
+#     def run_rasa():
+#         print("🚀 Starting Rasa Core (port 5005)...")
+#         subprocess.run(
+#             ["python", "-m", "rasa", "run", "--enable-api", "--cors", "*", "--port", "5005"],
+#             cwd=".",
+#         )
 
-    def run_actions():
-        print("⚙️ Starting Rasa Action Server (port 5055)...")
-        subprocess.run(
-            ["python", "-m", "rasa", "run", "actions", "--port", "5055"],
-            cwd=".",
-        )
+#     def run_actions():
+#         print("⚙️ Starting Rasa Action Server (port 5055)...")
+#         subprocess.run(
+#             ["python", "-m", "rasa", "run", "actions", "--port", "5055"],
+#             cwd=".",
+#         )
 
-    # Run both threads
-    threading.Thread(target=run_rasa, daemon=True).start()
-    threading.Thread(target=run_actions, daemon=True).start()
+#     # Run both threads
+#     threading.Thread(target=run_rasa, daemon=True).start()
+#     threading.Thread(target=run_actions, daemon=True).start()
 
-    # Wait until Rasa Core API is live
-    print("⏳ Waiting for Rasa to start...")
-    if is_service_alive("http://localhost:5005/status"):
-        print("✅ Rasa Core is ready.")
-    else:
-        print("⚠️ Rasa failed to start in time. Check logs.")
+#     # Wait until Rasa Core API is live
+#     print("⏳ Waiting for Rasa to start...")
+#     if is_service_alive("http://localhost:5005/status"):
+#         print("✅ Rasa Core is ready.")
+#     else:
+#         print("⚠️ Rasa failed to start in time. Check logs.")
 
-@app.on_event("startup")
-def startup_event():
-    start_rasa_services()
+# @app.on_event("startup")
+# def startup_event():
+#     start_rasa_services()

@@ -5,10 +5,12 @@ from pydantic import BaseModel
 from jose import jwt, JWTError
 import os
 import requests
+import json
 
 router = APIRouter(prefix="/mallassistant/api/chatbot", tags=["Chatbot"])
 SECRET_KEY = os.getenv("SECRET_KEY") 
 security = HTTPBearer()
+RAG_URL = "http://localhost:8001"
 
 def verify_token(credentials: HTTPAuthorizationCredentials = Depends(security)):
     print('verify_token')
@@ -42,10 +44,13 @@ def ask_bot(request: ChatRequest, user=Depends(verify_token)):
 
     payload = {"sender": user["sub"], "message": request.query}
     try:
-        rasa_url = "http://localhost:5005/webhooks/rest/webhook"
-        res = requests.post(rasa_url, json=payload)
+        # rasa_url = "http://localhost:5005/webhooks/rest/webhook"
+        # res = requests.post(rasa_url, json=payload)
+        res = requests.post(f"{RAG_URL}/completions", json=payload, timeout=60)
         res.raise_for_status()
-        messages = " ".join([m.get("text", "") for m in res.json()])
+        print(res)
+        messages = res.text
+        print(messages)
         return {"response": messages or "Sorry, I couldn't find an answer."}
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error connecting to Rasa: {str(e)}")

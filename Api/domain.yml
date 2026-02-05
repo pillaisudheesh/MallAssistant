@@ -11,6 +11,14 @@ intents:
   - find_food
   - find_store
   - ask_offers
+  - smalltalk
+
+entities:
+  - shop
+  - category
+  - price
+  - place
+  - amenity
 
 responses:
   utter_greet:
@@ -38,11 +46,18 @@ responses:
   utter_ask_food:
   - text: "You can find meals under ₹500 at Shop 1 in the food court."
 
+  utter_smalltalk:
+  - text: "Sorry I am a computer generated code, I dont have any feelings"
+
+
 session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true
 
 actions:
-  - action_find_food
-  - action_find_store
-  - action_ask_offers
+  - action_query_mall_db_dynamic
+  # - action_find_food
+  # - action_find_store
+  # - action_ask_offers
+  # - action_offers
+  # - action_category_query
